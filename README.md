@@ -4,8 +4,11 @@ A price watch application to capture grocery prices from major HK supermarket. S
 
 Tools use:
 Java 8 
+
 R programming - for data analysis
+
 HtmlUnit - capture gorcery prices from various internet source
+
 JRI - Java/R Interface for connecting java and R 
 
 Mongo DB
