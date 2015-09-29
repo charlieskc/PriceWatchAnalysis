@@ -1,29 +1,40 @@
 package com.charlie.pricewatch;
-import java.util.List;
-
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomElement;
-import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
+import com.gargoylesoftware.htmlunit.html.HtmlTableCell;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
-
 
 
 public class WebParser {
 	
-	String url = "http://www3.consumer.org.hk/pricewatch/supermarket/index.php?view=0&filter1=001&filter2=001&filter3=001";
+	static String url = "http://www3.consumer.org.hk/pricewatch/supermarket/index.php?view=0&filter1=045&filter2=001&filter3=";
 	
 	public static void parse() throws Exception {
 		
 	    WebClient webClient = new WebClient(BrowserVersion.FIREFOX_38);
 	   
 	    HtmlPage page = (HtmlPage) webClient.getPage(url);
-	    System.out.println(page.asText());
+	    HtmlForm form = (HtmlForm) page.getElementByName("itemlist");
+	    
+	    //get the 2nd table which contains the price details
+	    HtmlTable table = (HtmlTable)form.getElementsByTagName("table").item(2);
+	    //System.out.println(table.asXml());
+
+	    
+	    for(HtmlTableRow row : table.getRows()){
+	    	for(HtmlTableCell cell : row.getCells()){
+	    		System.out.print(cell.asText());
+		    	if(cell != row.getCells().get(row.getCells().size()-1))
+		    		System.out.print(",");
+		    	else
+		    		System.out.println();
+	    	}
+	    }
+	    //System.out.println(table.asXml());
 	   
 	}
 
