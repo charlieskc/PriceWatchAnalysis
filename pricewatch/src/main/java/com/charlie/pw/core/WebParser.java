@@ -1,4 +1,4 @@
-package com.charlie.pricewatch;
+package com.charlie.pw.core;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -11,18 +11,17 @@ import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
 
 public class WebParser {
 	
-	static String url = "http://www3.consumer.org.hk/pricewatch/supermarket/index.php?view=0&filter1=045&filter2=001&filter3=";
+	static String url = "http://www3.consumer.org.hk/pricewatch/supermarket/index.php?view=0&filter1=&filter2=&filter3=";
 	
 	public static void parse() throws Exception {
 		
 	    WebClient webClient = new WebClient(BrowserVersion.FIREFOX_38);
 	   
 	    HtmlPage page = (HtmlPage) webClient.getPage(url);
+	    //get the form "itemlist"
 	    HtmlForm form = (HtmlForm) page.getElementByName("itemlist");
-	    
 	    //get the 2nd table which contains the price details
 	    HtmlTable table = (HtmlTable)form.getElementsByTagName("table").item(2);
-	    //System.out.println(table.asXml());
 
 	    
 	    for(HtmlTableRow row : table.getRows()){
