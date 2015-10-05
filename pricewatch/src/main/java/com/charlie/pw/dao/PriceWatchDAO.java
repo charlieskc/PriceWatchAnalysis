@@ -20,7 +20,10 @@ public class PriceWatchDAO extends BaseDAO{
 		
 		document.put("productId", p.getSku());
 		document.put("productName", p.getName());
-		 
+		document.put("category", p.getCategory());
+		document.put("brand", p.getBrand());
+		document.put("LastUpdDate", p.getLastUpdDate());
+				 
 		for(PriceWatch pw : p.getPriceList()){
 			BasicDBObject priceDetail = new BasicDBObject();
 			priceDetail.put("supermarket", pw.getMarketName());
@@ -28,12 +31,9 @@ public class PriceWatchDAO extends BaseDAO{
 			document.put("price", priceDetail);
 		}
 		
-		
 		DBCollection coll = getDBCollection("pricewatch");	
 		 
 		coll.insert(document);
-		 
-
 	
 	}
 	

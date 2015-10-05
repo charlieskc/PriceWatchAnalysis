@@ -23,7 +23,7 @@ public abstract class BaseDAO implements AutoCloseable{
 	}
 
 	private void connectDB() throws UnknownHostException{
-		mongoClient = new MongoClient("192.168.99.101", 32771);
+		mongoClient = new MongoClient("192.168.99.101", 32768);
 		db = mongoClient.getDB("pricewatch");
 		
 	}

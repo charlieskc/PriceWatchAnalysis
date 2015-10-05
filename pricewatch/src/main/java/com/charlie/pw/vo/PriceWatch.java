@@ -6,6 +6,13 @@ public class PriceWatch {
 	private double price;
 	private Product product;
 	
+	public PriceWatch(String marketName, double price){
+		this.price = price;
+		this.marketName = marketName;
+	}
+	
+	public PriceWatch(){};
+	
 	public String getMarketName() {
 		return marketName;
 	}

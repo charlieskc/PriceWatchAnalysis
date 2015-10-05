@@ -16,9 +16,10 @@ public class App
     public static void main( String[] args ) throws Exception
     {
         System.out.println( "Hello World!" );
-        WebParser.parse();
+        WebParser parser = new WebParser();
+        parser.parse();
         Product p = new Product();
-        p.setName("Charlie");
+        p.setName("Charlie SIU");
         p.setSku("97259741");
         PriceWatch pw = new PriceWatch();
         pw.setPrice(12.5);
