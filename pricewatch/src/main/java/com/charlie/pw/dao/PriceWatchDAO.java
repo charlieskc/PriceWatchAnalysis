@@ -1,6 +1,8 @@
 package com.charlie.pw.dao;
 
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.charlie.pw.vo.PriceWatch;
 import com.charlie.pw.vo.Product;
@@ -17,6 +19,7 @@ public class PriceWatchDAO extends BaseDAO{
 	public void addPriceWatch(Product p){
 		
 		BasicDBObject document = new BasicDBObject();
+		List <BasicDBObject> priceDetailList = new ArrayList <BasicDBObject>();
 		
 		document.put("productId", p.getId());
 		document.put("productName", p.getName());
@@ -28,14 +31,19 @@ public class PriceWatchDAO extends BaseDAO{
 			BasicDBObject priceDetail = new BasicDBObject();
 			priceDetail.put("supermarket", pw.getMarketName());
 			priceDetail.put("price", pw.getPrice());
-			document.put("price", priceDetail);
+			priceDetailList.add(priceDetail);			
+			document.put("price", priceDetailList);
 		}
 		
-		DBCollection coll = getDBCollection("pricewatch");	
+		DBCollection coll = getDBCollection("price-watch-collection");	
 		 
 		coll.insert(document);
 	
 	}
 	
+	public void dropCollection(String collection){
+		DBCollection coll = getDBCollection(collection);	
+		coll.drop();
+	}
 	
 }
