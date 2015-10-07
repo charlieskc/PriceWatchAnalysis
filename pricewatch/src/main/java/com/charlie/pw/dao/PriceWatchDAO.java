@@ -18,7 +18,7 @@ public class PriceWatchDAO extends BaseDAO{
 		
 		BasicDBObject document = new BasicDBObject();
 		
-		document.put("productId", p.getSku());
+		document.put("productId", p.getId());
 		document.put("productName", p.getName());
 		document.put("category", p.getCategory());
 		document.put("brand", p.getBrand());

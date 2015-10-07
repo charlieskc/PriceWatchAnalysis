@@ -1,13 +1,18 @@
 package com.charlie.pw.vo;
 
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "products")
 public class Product {
 	
+	@Id
+	private String id;
 	private String name;
-	private String sku;
 	private String category;
 	private String brand;
 	private List <PriceWatch> priceList = new ArrayList<PriceWatch>();
@@ -29,11 +34,11 @@ public class Product {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getSku() {
-		return sku;
+	public String getId() {
+		return id;
 	}
-	public void setSku(String sku) {
-		this.sku = sku;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getCategory() {
@@ -60,6 +65,12 @@ public class Product {
 		this.lastUpdDate = lastUpdDate;
 	}
 	
+	 @Override
+	    public String toString() {
+	        return String.format(
+	                "Product[id=%s, name='%s', category='%s']",
+	                id, name, category);
+	    }
 	
 	
 	

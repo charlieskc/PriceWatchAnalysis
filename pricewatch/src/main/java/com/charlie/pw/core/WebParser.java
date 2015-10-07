@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.charlie.pw.service.PriceWatchDaoManager;
+import com.charlie.pw.service.PriceWatchManager;
 import com.charlie.pw.vo.PriceWatch;
 import com.charlie.pw.vo.Product;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -37,6 +37,8 @@ public class WebParser {
 	    //get the 2nd table which contains the price details
 	    HtmlTable table = (HtmlTable)form.getElementsByTagName("table").item(2);
 
+	    PriceWatchManager.exportCSV(table);
+	    
 	    
 	    for(HtmlTableRow row : table.getRows()){
 	    	p = new Product();
@@ -68,7 +70,7 @@ public class WebParser {
 	    	pList.add(p);
 	    	
 	  
-	    	PriceWatchDaoManager daoManager = new PriceWatchDaoManager();
+	    	PriceWatchManager daoManager = new PriceWatchManager();
 	    	daoManager.addPriceWatch(p);
 	    	
 	    	//pw.setPrice(Double.parseDouble(row.getCell(4).asText().replace('$', ' ').trim()));
@@ -92,21 +94,6 @@ public class WebParser {
 			return -1;
 		return Double.parseDouble(s);
 	}
-	
-	
-	public static HtmlTable getTableFromDomElement(DomElement element) throws Exception{
-		
-		if(element instanceof com.gargoylesoftware.htmlunit.html.HtmlTable){
-			System.out.println("----YES!!!!-----");
-			HtmlTable table = (HtmlTable) element;
-			return table;
-		}
-			
-		for(DomElement e : element.getChildElements()){			
-				getTableFromDomElement(e);
-		    }
 
-		throw new Exception("No HTML table found");
-	}
 }
 

@@ -18,17 +18,6 @@ public class App
         System.out.println( "Hello World!" );
         WebParser parser = new WebParser();
         parser.parse();
-        Product p = new Product();
-        p.setName("Charlie SIU");
-        p.setSku("97259741");
-        PriceWatch pw = new PriceWatch();
-        pw.setPrice(12.5);
-        pw.setMarketName("ParkNShop");
-        List<PriceWatch> pwList = new ArrayList<PriceWatch>();
-	    pwList.add(pw);
-        p.setPriceList(pwList);
         
-        PriceWatchDAO pwDao = new PriceWatchDAO();
-        pwDao.addPriceWatch(p);
     }
 }
